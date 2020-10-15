@@ -1,10 +1,10 @@
-# FINALPACKAGE = 1
-# DEBUG = 0
+FINALPACKAGE = 1
+DEBUG = 0
 
 INSTALL_TARGET_PROCESSES = SpringBoard
 
 ARCHS = arm64 arm64e
-TARGET = iphone:clang::13.0
+TARGET = iphone:clang::14.1
 
 include $(THEOS)/makefiles/common.mk
 

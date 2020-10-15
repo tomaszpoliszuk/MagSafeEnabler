@@ -1,7 +1,7 @@
 Package: com.tomaszpoliszuk.lockscreenbatterymagsafe
 Depends: firmware (>= 14.1), mobilesubstrate, preferenceloader
 Name: Lock Screen Battery - MagSafe
-Version: 0.5
+Version: 1.0
 Architecture: iphoneos-arm
 Author: Tomasz Poliszuk
 Section: Tweaks

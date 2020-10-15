@@ -15,6 +15,18 @@
 	size.height = 124;
 	return size;
 }
+- (double)ringDiameter {
+	return 300;
+}
+- (double)splashRingDiameter {
+	return 300;
+}
+- (double)staticViewRingDiameter {
+	return 300;
+}
+- (double)lineWidth {
+	return 24;
+}
 %end
 
 %ctor {
