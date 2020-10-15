@@ -17,13 +17,6 @@
 }
 %end
 
-@interface CSBatteryChargingInfo : NSObject
-@property (assign,getter=isChargingWithInternalWirelessAccessory,nonatomic) BOOL chargingWithInternalWirelessAccessory;
-@end
-
-@interface CSChargingViewController
-@end
-
 %hook CSChargingViewController
 -(id)initWithChargingInfo:(id)info {
 	[(CSBatteryChargingInfo *)info setChargingWithInternalWirelessAccessory:YES];
