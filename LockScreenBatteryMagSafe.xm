@@ -17,6 +17,32 @@
 }
 %end
 
+@interface CSBatteryChargingInfo : NSObject
+@property (assign,getter=isChargingWithInternalWirelessAccessory,nonatomic) BOOL chargingWithInternalWirelessAccessory;
+@end
+
+@interface CSChargingViewController
+@end
+
+%hook CSChargingViewController
+-(id)initWithChargingInfo:(id)info {
+	[(CSBatteryChargingInfo *)info setChargingWithInternalWirelessAccessory:YES];
+	%orig(info);
+	return self;
+}
+// worth looking into:
+-(long long)presentationType {
+	// check what does this method returns and try to change it.
+	NSLog(@"[MagCharge] presentationType: %lld",%orig);
+	return %orig;
+}
+-(long long)presentationStyle {
+	// check what does this method returns and try to change it.
+	NSLog(@"[MagCharge] presentationStyle: %lld",%orig);
+	return %orig;
+}
+%end
+
 %ctor {
 	%init;
 }
