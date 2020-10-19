@@ -1,10 +1,10 @@
-# Lock Screen Battery - MagSafe
+# MagSafe Enabler
 
 ## Compatibility
 iOS 14.1 and above
 
 ## What this tweak do:
-Changes battery view to new MagSafe charging animation when device is connected to power source
+- Enables new native "MagSafe" charging view when connecting device to power source on iOS 14.1 and above
 
 **No options to configure**
 

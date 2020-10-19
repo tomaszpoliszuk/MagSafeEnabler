@@ -19,10 +19,10 @@
 	return 300;
 }
 - (double)splashRingDiameter {
-	return 300;
+	return 700;
 }
 - (double)staticViewRingDiameter {
-	return 300;
+	return 700;
 }
 - (double)lineWidth {
 	return 24;
