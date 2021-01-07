@@ -29,20 +29,37 @@
 %hook CSAccessoryConfiguration
 - (CGSize)boltSize {
 	CGSize size = %orig;
-	size.width = 84;
-	size.height = 124;
+	if ( [UIScreen mainScreen].bounds.size.width < 321 ) {
+		size.width = 72;
+		size.height = 108;
+	} else {
+		size.width = 84;
+		size.height = 124;
+	}
 	return size;
 }
 - (double)ringDiameter {
+	if ( [UIScreen mainScreen].bounds.size.width < 321 ) {
+		return 256;
+	}
 	return 300;
 }
 - (double)splashRingDiameter {
+	if ( [UIScreen mainScreen].bounds.size.width < 321 ) {
+		return 598;
+	}
 	return 700;
 }
 - (double)staticViewRingDiameter {
+	if ( [UIScreen mainScreen].bounds.size.width < 321 ) {
+		return 598;
+	}
 	return 700;
 }
 - (double)lineWidth {
+	if ( [UIScreen mainScreen].bounds.size.width < 321 ) {
+		return 20;
+	}
 	return 24;
 }
 %end
