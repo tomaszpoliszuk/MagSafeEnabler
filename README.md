@@ -9,4 +9,4 @@ iOS 14.1 and above
 **No options to configure**
 
 ## Screenshots:
-![LockScreenBatteryMagSafe](screenshots/lockscreenbatterymagsafe1.png)
+![MagSafeEnabler](screenshots/magsafeenabler1.png)
