@@ -1,7 +1,7 @@
 Package: com.tomaszpoliszuk.lockscreenbatterymagsafe
 Depends: firmware (>= 14.1), mobilesubstrate
 Name: MagSafe Enabler
-Version: 1.0.2
+Version: 1.0.3
 Architecture: iphoneos-arm
 Author: Tomasz Poliszuk
 Section: Tweaks

@@ -16,11 +16,28 @@
  */
 
 
+@interface SBFTouchPassThroughView : UIView
+@end
+@interface CSCoverSheetViewBase : SBFTouchPassThroughView
+@end
+@interface CSBatteryChargingView : CSCoverSheetViewBase
+@end
+@interface CSBatteryChargingRingView : CSBatteryChargingView
+@property (nonatomic, retain) CALayer *chargingBoltGlyph;
+@end
+
 %hook CSPowerChangeObserver
 - (bool)isConnectedToWirelessInternalChargingAccessory {
 	return YES;
 }
 - (void)setIsConnectedToWirelessInternalChargingAccessory:(bool)arg1 {
+	arg1 = YES;
+	%orig;
+}
+- (bool)isConnectedToWirelessInternalCharger {
+	return YES;
+}
+- (void)setIsConnectedToWirelessInternalCharger:(bool)arg1 {
 	arg1 = YES;
 	%orig;
 }
@@ -61,6 +78,53 @@
 		return 20;
 	}
 	return 24;
+}
+%end
+
+%hook CSMagSafeRingConfiguration
+- (double)ringDiameter {
+	if ( [UIScreen mainScreen].bounds.size.width < 321 ) {
+		return 256;
+	}
+	return 300;
+}
+- (double)splashRingDiameter {
+	if ( [UIScreen mainScreen].bounds.size.width < 321 ) {
+		return 598;
+	}
+	return 700;
+}
+- (double)staticViewRingDiameter {
+	if ( [UIScreen mainScreen].bounds.size.width < 321 ) {
+		return 598;
+	}
+	return 700;
+}
+- (double)lineWidth {
+	if ( [UIScreen mainScreen].bounds.size.width < 321 ) {
+		return 20;
+	}
+	return 24;
+}
+%end
+
+%hook CSBatteryChargingRingView
+- (CALayer *)chargingBoltGlyph {
+	CALayer *origValue = %orig;
+	CGRect newBoltFrame = origValue.frame;
+	if ( [UIScreen mainScreen].bounds.size.width < 321 ) {
+		newBoltFrame.size.width = 72;
+		newBoltFrame.size.height = 108;
+	} else {
+		newBoltFrame.size.width = 84;
+		newBoltFrame.size.height = 124;
+	}
+	origValue.frame = newBoltFrame;
+	return origValue;
+}
+- (void)_layoutChargePercentLabel {
+	[self chargingBoltGlyph];
+	%orig;
 }
 %end
 
