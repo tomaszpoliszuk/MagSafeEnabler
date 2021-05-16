@@ -3,6 +3,12 @@ Depends: firmware (>= 14.1), mobilesubstrate
 Name: MagSafe Enabler
 Version: 1.0.3
 Architecture: iphoneos-arm
+Description: Enable new native MagSafe charging view on lockscreen when connecting device to power source
+Homepage: http://moreinfo.thebigboss.org/moreinfo/depiction.php?file=lockscreenbatterymagsafeDp
+Depiction: http://moreinfo.thebigboss.org/moreinfo/depiction.php?file=lockscreenbatterymagsafeDp
+Maintainer: BigBoss <bigboss@thebigboss.org>
 Author: Tomasz Poliszuk
+Sponsor: thebigboss.org <http://thebigboss.org>
 Section: Tweaks
 dev: tomaszpoliszuk
+Tag: purpose::extension
