@@ -1,10 +1,9 @@
 /* MagSafe Enabler - enables new native MagSafe charging view when connecting device to power source on iOS 14.1 and above on iOS/iPadOS
- * Copyright (C) 2020 Tomasz Poliszuk
+ * (c) Copyright 2020-2022 Tomasz Poliszuk
  *
  * MagSafe Enabler is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * the Free Software Foundation, version 3 of the License.
  *
  * MagSafe Enabler is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -15,7 +14,6 @@
  * along with MagSafe Enabler. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 @interface SBFTouchPassThroughView : UIView
 @end
 @interface CSCoverSheetViewBase : SBFTouchPassThroughView
@@ -25,21 +23,46 @@
 @interface CSBatteryChargingRingView : CSBatteryChargingView
 @property (nonatomic, retain) CALayer *chargingBoltGlyph;
 @end
+@interface CSPowerChangeObserver : NSObject
+@property (nonatomic) bool isConnectedToWirelessInternalCharger;
+@end
+
+%group iOS14_1_to_14_5_1
 
 %hook CSPowerChangeObserver
 - (bool)isConnectedToWirelessInternalChargingAccessory {
 	return YES;
 }
 - (void)setIsConnectedToWirelessInternalChargingAccessory:(bool)arg1 {
-	arg1 = YES;
-	%orig;
+	%orig(YES);
 }
 - (bool)isConnectedToWirelessInternalCharger {
 	return YES;
 }
 - (void)setIsConnectedToWirelessInternalCharger:(bool)arg1 {
-	arg1 = YES;
+	%orig(YES);
+}
+%end
+
+%end
+
+%group iOS14_6_up
+
+%hook CSPowerChangeObserver
+- (void)update {
 	%orig;
+	[self setIsConnectedToWirelessInternalCharger:YES];
+}
+%end
+
+%end
+
+%hook CSLockScreenChargingSettings
+- (long long)wirelessChargingAnimationType {
+	return 1;
+}
+- (void)setWirelessChargingAnimationType:(long long)arg1 {
+	%orig(1);
 }
 %end
 
@@ -130,4 +153,9 @@
 
 %ctor {
 	%init;
+	if ( @available(iOS 14.6, *) ) {
+		%init(iOS14_6_up);
+	} else {
+		%init(iOS14_1_to_14_5_1);
+	}
 }
